@@ -1,31 +1,53 @@
+```css
+/* =========================================================
+   ATS RESUME ANALYZER — MODERN SAAS UI
+========================================================= */
+
 :root {
-  --bg: #f5f7fb;
+  --bg: #f7f8fc;
   --card: #ffffff;
+  --card-soft: #fafbff;
+
   --text: #111827;
+  --text-secondary: #374151;
   --muted: #6b7280;
-  --border: #e5e7eb;
+  --light-muted: #9ca3af;
 
-  --accent: #4f46e5;
-  --accent-dark: #4338ca;
-  --accent-light: #eef2ff;
+  --border: #e6e8ef;
+  --border-light: #eef0f5;
 
-  --good: #16a34a;
-  --good-bg: #f0fdf4;
+  --accent: #635bff;
+  --accent-dark: #5148e5;
+  --accent-light: #f0efff;
 
-  --bad: #dc2626;
-  --bad-bg: #fef2f2;
+  --green: #16a34a;
+  --green-light: #ecfdf3;
 
-  --warning: #d97706;
-  --warning-bg: #fffbeb;
+  --red: #dc2626;
+  --red-light: #fef2f2;
 
-  --radius: 14px;
-  --shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
-  --shadow-hover: 0 12px 35px rgba(15, 23, 42, 0.1);
+  --orange: #d97706;
+  --orange-light: #fff7ed;
+
+  --blue: #2563eb;
+  --blue-light: #eff6ff;
+
+  --radius: 16px;
+  --radius-small: 10px;
+
+  --shadow:
+    0 2px 5px rgba(15, 23, 42, 0.03),
+    0 10px 30px rgba(15, 23, 42, 0.05);
+
+  --shadow-hover:
+    0 5px 10px rgba(15, 23, 42, 0.04),
+    0 20px 45px rgba(15, 23, 42, 0.08);
 }
 
-/* =========================
+
+/* =========================================================
    RESET
-========================= */
+========================================================= */
 
 * {
   box-sizing: border-box;
@@ -49,141 +71,166 @@ body {
     Arial,
     sans-serif;
 
+  color: var(--text);
+
   background:
     radial-gradient(
-      circle at top left,
-      rgba(79, 70, 229, 0.08),
+      circle at 50% -10%,
+      rgba(99, 91, 255, 0.09),
       transparent 35%
     ),
     var(--bg);
 
-  color: var(--text);
   line-height: 1.5;
 }
 
-/* =========================
-   MAIN CONTAINER
-========================= */
+
+/* =========================================================
+   MAIN
+========================================================= */
 
 .container {
   width: 100%;
-  max-width: 900px;
+  max-width: 960px;
+
   margin: 0 auto;
-  padding: 55px 24px 80px;
+
+  padding: 55px 24px 90px;
 }
 
-/* =========================
+
+/* =========================================================
    HEADER
-========================= */
+========================================================= */
 
 h1 {
   margin: 0;
 
-  font-size: clamp(30px, 5vw, 42px);
+  font-size: clamp(32px, 5vw, 46px);
   font-weight: 800;
-  letter-spacing: -1.5px;
 
-  color: var(--text);
+  letter-spacing: -1.8px;
+
+  line-height: 1.1;
 }
 
 .subtitle {
-  max-width: 650px;
+  max-width: 680px;
 
-  margin: 10px 0 32px;
+  margin: 12px 0 35px;
 
   color: var(--muted);
+
   font-size: 16px;
   line-height: 1.7;
 }
 
-/* =========================
-   FORM CARD
-========================= */
+
+/* =========================================================
+   FORM
+========================================================= */
 
 form {
   display: flex;
   flex-direction: column;
   gap: 8px;
 
-  padding: 28px;
+  padding: 30px;
 
-  background: var(--card);
+  background: rgba(255, 255, 255, 0.92);
+
   border: 1px solid var(--border);
+
   border-radius: var(--radius);
 
   box-shadow: var(--shadow);
 
   transition:
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 form:hover {
   box-shadow: var(--shadow-hover);
 }
 
-/* =========================
-   LABELS
-========================= */
+
+/* =========================================================
+   LABEL
+========================================================= */
 
 label {
   margin-top: 14px;
 
+  color: var(--text-secondary);
+
   font-size: 13px;
   font-weight: 700;
-  color: var(--text);
 }
 
-/* =========================
+
+/* =========================================================
    FILE INPUT
-========================= */
+========================================================= */
 
 input[type="file"] {
   width: 100%;
 
-  margin-top: 4px;
-  padding: 14px;
+  margin-top: 5px;
 
-  border: 2px dashed #d1d5db;
-  border-radius: 10px;
+  padding: 18px;
 
-  background: #fafafa;
+  border: 2px dashed #d8dbe5;
+
+  border-radius: var(--radius-small);
+
+  background: #fafbff;
+
+  color: var(--muted);
 
   font-size: 14px;
-  color: var(--muted);
 
   cursor: pointer;
 
   transition:
     border-color 0.2s ease,
-    background 0.2s ease;
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 input[type="file"]:hover {
   border-color: var(--accent);
+
   background: var(--accent-light);
+
+  transform: translateY(-1px);
 }
 
-/* =========================
+
+/* =========================================================
    TEXTAREA
-========================= */
+========================================================= */
 
 textarea {
   width: 100%;
-  min-height: 160px;
+  min-height: 170px;
 
-  margin-top: 4px;
-  padding: 14px 16px;
+  margin-top: 5px;
+
+  padding: 15px 16px;
 
   border: 1px solid var(--border);
-  border-radius: 10px;
+
+  border-radius: var(--radius-small);
 
   background: #fff;
 
   color: var(--text);
 
   font-family: inherit;
+
   font-size: 14px;
+
   line-height: 1.6;
 
   resize: vertical;
@@ -196,45 +243,51 @@ textarea {
 }
 
 textarea::placeholder {
-  color: #9ca3af;
+  color: var(--light-muted);
 }
 
 textarea:focus {
   border-color: var(--accent);
 
   box-shadow:
-    0 0 0 3px rgba(79, 70, 229, 0.12);
+    0 0 0 4px rgba(99, 91, 255, 0.1);
 }
 
-/* =========================
+
+/* =========================================================
    BUTTON
-========================= */
+========================================================= */
 
 button {
   width: 100%;
 
   margin-top: 22px;
-  padding: 13px 20px;
 
-  border: none;
-  border-radius: 10px;
+  padding: 14px 22px;
 
-  background: linear-gradient(
-    135deg,
-    var(--accent),
-    var(--accent-dark)
-  );
+  border: 0;
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-dark)
+    );
 
   color: white;
 
   font-family: inherit;
+
   font-size: 15px;
+
   font-weight: 700;
 
   cursor: pointer;
 
   box-shadow:
-    0 5px 15px rgba(79, 70, 229, 0.25);
+    0 8px 20px rgba(99, 91, 255, 0.25);
 
   transition:
     transform 0.15s ease,
@@ -243,10 +296,10 @@ button {
 }
 
 button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 
   box-shadow:
-    0 8px 20px rgba(79, 70, 229, 0.3);
+    0 12px 28px rgba(99, 91, 255, 0.3);
 }
 
 button:active {
@@ -255,22 +308,27 @@ button:active {
 
 button:disabled {
   opacity: 0.55;
+
   cursor: not-allowed;
+
   transform: none;
+
   box-shadow: none;
 }
 
-/* =========================
+
+/* =========================================================
    UTILITY
-========================= */
+========================================================= */
 
 .hidden {
   display: none !important;
 }
 
-/* =========================
+
+/* =========================================================
    ERROR
-========================= */
+========================================================= */
 
 .error {
   display: flex;
@@ -278,47 +336,59 @@ button:disabled {
   gap: 10px;
 
   margin-top: 18px;
+
   padding: 14px 16px;
 
-  background: var(--bad-bg);
+  background: var(--red-light);
 
-  color: var(--bad);
+  color: var(--red);
 
   border: 1px solid #fecaca;
-  border-radius: 10px;
+
+  border-radius: 11px;
 
   font-size: 14px;
+
   line-height: 1.5;
 }
 
-/* =========================
+
+/* =========================================================
    LOADING
-========================= */
+========================================================= */
 
 .loading {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
 
-  margin-top: 20px;
-  padding: 14px;
+  gap: 11px;
+
+  margin-top: 22px;
+
+  padding: 15px;
+
+  background: white;
+
+  border: 1px solid var(--border);
+
+  border-radius: 11px;
 
   color: var(--muted);
+
   font-size: 14px;
 
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  box-shadow: var(--shadow);
 }
 
 .loading::before {
   content: "";
 
-  width: 16px;
-  height: 16px;
+  width: 17px;
+  height: 17px;
 
   border: 2px solid #e5e7eb;
+
   border-top-color: var(--accent);
 
   border-radius: 50%;
@@ -332,20 +402,21 @@ button:disabled {
   }
 }
 
-/* =========================
-   RESULTS
-========================= */
+
+/* =========================================================
+   RESULTS CONTAINER
+========================================================= */
 
 .results {
-  margin-top: 40px;
+  margin-top: 45px;
 
-  animation: fadeUp 0.4s ease;
+  animation: fadeUp 0.45s ease;
 }
 
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(15px);
   }
 
   to {
@@ -354,156 +425,262 @@ button:disabled {
   }
 }
 
-/* =========================
-   SCORE SECTION
-========================= */
+
+/* =========================================================
+   SCORE CARD
+========================================================= */
 
 .score-section {
-  display: flex;
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 190px 1fr;
+
+  gap: 35px;
+
   align-items: center;
-  gap: 30px;
 
-  padding: 28px;
+  padding: 30px;
 
-  background: var(--card);
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #fbfaff
+    );
 
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+
+  border-radius: 20px;
 
   box-shadow: var(--shadow);
 
-  margin-bottom: 24px;
+  overflow: hidden;
 }
 
-/* =========================
+.score-section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 220px;
+  height: 220px;
+
+  top: -130px;
+  right: -80px;
+
+  background: rgba(99, 91, 255, 0.08);
+
+  border-radius: 50%;
+}
+
+
+/* =========================================================
    SCORE CIRCLE
-========================= */
+========================================================= */
 
 .score-circle {
   position: relative;
 
-  min-width: 125px;
-  width: 125px;
-  height: 125px;
+  width: 155px;
+  height: 155px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  border-radius: 50%;
+  margin: auto;
 
-  border: 8px solid var(--accent);
+  border-radius: 50%;
 
   background:
     radial-gradient(
       circle,
-      #ffffff 55%,
-      var(--accent-light) 56%,
-      var(--accent-light) 100%
+      white 57%,
+      transparent 58%
     );
 
   color: var(--text);
 
-  font-size: 32px;
-  font-weight: 800;
+  font-size: 38px;
+
+  font-weight: 850;
+
+  letter-spacing: -1px;
 
   box-shadow:
-    0 0 0 5px rgba(79, 70, 229, 0.08);
+    0 0 0 9px rgba(99, 91, 255, 0.07),
+    0 12px 35px rgba(99, 91, 255, 0.12);
+}
+
+/*
+  Outer ring
+*/
+
+.score-circle::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 50%;
+
+  border: 10px solid #eeeef5;
+
+  border-top-color: var(--accent);
+
+  border-right-color: var(--accent);
+
+  transform: rotate(-35deg);
 }
 
 .score-max {
   margin-left: 3px;
 
-  font-size: 13px;
-  font-weight: 500;
-
   color: var(--muted);
+
+  font-size: 13px;
+
+  font-weight: 500;
 }
 
-/* =========================
-   SUB SCORES
-========================= */
+
+/* =========================================================
+   SCORE DETAILS
+========================================================= */
 
 .sub-scores {
-  flex: 1;
-
   display: grid;
+
   grid-template-columns: 1fr 1fr;
 
-  gap: 12px;
+  gap: 14px;
 }
 
 .sub-score-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  position: relative;
 
-  padding: 11px 13px;
+  padding: 16px;
 
-  background: #f9fafb;
+  background: #fafbff;
 
-  border: 1px solid #f0f0f0;
-  border-radius: 8px;
+  border: 1px solid var(--border-light);
 
-  font-size: 13px;
+  border-radius: 12px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.sub-score-item:hover {
+  transform: translateY(-2px);
+
+  border-color: #dcdafc;
 }
 
 .sub-score-item span.label {
+  display: block;
+
+  margin-bottom: 7px;
+
   color: var(--muted);
+
+  font-size: 12px;
+
+  font-weight: 600;
 }
 
 .sub-score-item span.value {
+  display: block;
+
   color: var(--text);
-  font-weight: 700;
+
+  font-size: 20px;
+
+  font-weight: 800;
 }
 
-/* =========================
+
+/* =========================================================
+   SCORE PROGRESS BAR
+========================================================= */
+
+.sub-score-item::after {
+  content: "";
+
+  display: block;
+
+  height: 4px;
+
+  margin-top: 10px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--accent) 70%,
+      #e8e9f0 70%
+    );
+}
+
+
+/* =========================================================
    SECTION HEADINGS
-========================= */
+========================================================= */
 
 h2 {
-  margin: 35px 0 14px;
+  margin: 42px 0 16px;
 
-  font-size: 21px;
-  font-weight: 750;
+  color: var(--text);
 
-  letter-spacing: -0.4px;
+  font-size: 22px;
+
+  font-weight: 800;
+
+  letter-spacing: -0.5px;
 }
 
 h3 {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
 
-  font-size: 14px;
-  font-weight: 700;
+  color: var(--text);
 
-  color: var(--muted);
+  font-size: 15px;
+
+  font-weight: 750;
 }
 
-/* =========================
-   TWO COLUMN LAYOUT
-========================= */
+
+/* =========================================================
+   TWO COLUMN RESULT CARDS
+========================================================= */
 
 .columns {
   display: grid;
 
   grid-template-columns: 1fr 1fr;
 
-  gap: 20px;
+  gap: 18px;
 }
 
-/* =========================
-   RESULT COLUMNS
-========================= */
-
 .column {
-  padding: 22px;
+  position: relative;
+
+  padding: 24px;
 
   background: var(--card);
 
   border: 1px solid var(--border);
+
   border-radius: var(--radius);
 
   box-shadow: var(--shadow);
+
+  overflow: hidden;
 
   transition:
     transform 0.2s ease,
@@ -511,63 +688,131 @@ h3 {
 }
 
 .column:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+
   box-shadow: var(--shadow-hover);
 }
 
-/* =========================
+
+/* =========================================================
+   CARD ACCENTS
+========================================================= */
+
+.column:first-child::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 4px;
+  height: 100%;
+
+  background: var(--green);
+}
+
+.column:last-child::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 4px;
+  height: 100%;
+
+  background: var(--red);
+}
+
+
+/* =========================================================
    LISTS
-========================= */
+========================================================= */
 
 ul {
   margin: 0;
+
   padding-left: 20px;
 }
 
 li {
-  margin-bottom: 10px;
+  margin-bottom: 11px;
+
+  color: var(--text-secondary);
 
   font-size: 14px;
-  line-height: 1.6;
+
+  line-height: 1.65;
 }
 
 li::marker {
   color: var(--accent);
 }
 
-/* =========================
+
+/* =========================================================
+   STRENGTH / WEAKNESS VISUAL
+========================================================= */
+
+.column:first-child h3 {
+  color: var(--green);
+}
+
+.column:last-child h3 {
+  color: var(--red);
+}
+
+
+/* =========================================================
    SUGGESTIONS
-========================= */
+========================================================= */
 
 #suggestions-list {
   margin: 0;
 
-  padding: 20px 22px 20px 40px;
+  padding: 24px 28px 24px 42px;
 
-  background: var(--card);
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff,
+      #fafaff
+    );
 
   border: 1px solid var(--border);
+
   border-radius: var(--radius);
 
   box-shadow: var(--shadow);
 }
 
 #suggestions-list li {
-  padding-left: 3px;
+  padding-left: 5px;
+
+  margin-bottom: 14px;
 }
 
-/* =========================
+#suggestions-list li:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================================================
    AI BADGE
-========================= */
+========================================================= */
 
 .ai-banner {
   display: inline-flex;
+
   align-items: center;
-  gap: 6px;
 
-  margin-top: 20px;
+  gap: 7px;
 
-  padding: 6px 11px;
+  margin-top: 22px;
+
+  padding: 7px 12px;
 
   border-radius: 999px;
 
@@ -575,59 +820,87 @@ li::marker {
 
   color: var(--accent);
 
+  border: 1px solid rgba(99, 91, 255, 0.1);
+
   font-size: 11px;
+
   font-weight: 800;
 
-  letter-spacing: 0.3px;
+  letter-spacing: 0.4px;
+
   text-transform: uppercase;
 }
 
 .ai-banner::before {
   content: "✦";
-  font-size: 11px;
+
+  font-size: 12px;
 }
 
-/* =========================
+
+/* =========================================================
    AI FEEDBACK
-========================= */
+========================================================= */
 
 .ai-feedback {
-  margin: 10px 0 0;
+  max-width: 720px;
+
+  margin: 12px 0 0;
 
   color: var(--muted);
 
   font-size: 14px;
-  line-height: 1.7;
+
+  line-height: 1.75;
 }
 
-/* =========================
-   KEYWORDS
-========================= */
+
+/* =========================================================
+   KEYWORDS CARD
+========================================================= */
 
 .keywords-details {
-  margin-top: 24px;
+  margin-top: 22px;
 
-  padding: 22px;
+  padding: 24px;
 
   background: var(--card);
 
   border: 1px solid var(--border);
+
   border-radius: var(--radius);
 
   box-shadow: var(--shadow);
 }
 
+.keywords-details h3 {
+  margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   CHIP LIST
+========================================================= */
+
 .chip-list {
   display: flex;
+
   flex-wrap: wrap;
+
   gap: 8px;
 }
 
+
+/* =========================================================
+   CHIP
+========================================================= */
+
 .chip {
   display: inline-flex;
+
   align-items: center;
 
-  padding: 6px 11px;
+  padding: 7px 12px;
 
   border-radius: 999px;
 
@@ -635,56 +908,69 @@ li::marker {
 
   color: var(--accent);
 
-  border: 1px solid rgba(79, 70, 229, 0.1);
+  border: 1px solid rgba(99, 91, 255, 0.12);
 
   font-size: 12px;
-  font-weight: 600;
+
+  font-weight: 650;
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+
+  background: #e8e6ff;
 }
 
 .chip.missing {
-  background: var(--bad-bg);
-  color: var(--bad);
+  background: var(--red-light);
+
+  color: var(--red);
 
   border-color: #fecaca;
 }
 
-/* =========================
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 700px) {
-  body {
-    padding: 0;
-  }
 
   .container {
-    padding: 35px 16px 60px;
+    padding: 35px 16px 65px;
   }
 
   form {
-    padding: 20px;
+    padding: 22px;
   }
 
   .score-section {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+
+    padding: 25px 20px;
 
     text-align: center;
-
-    padding: 24px 18px;
   }
 
   .score-circle {
-    min-width: 110px;
-    width: 110px;
-    height: 110px;
+    width: 135px;
+    height: 135px;
 
-    font-size: 28px;
+    font-size: 32px;
   }
 
   .sub-scores {
     width: 100%;
 
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+
+    text-align: left;
   }
 
   .columns {
@@ -692,33 +978,50 @@ li::marker {
   }
 
   .column {
-    padding: 20px;
+    padding: 21px;
   }
 
   h1 {
-    font-size: 30px;
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 20px;
   }
 }
 
-/* =========================
+
+/* =========================================================
    SMALL PHONES
-========================= */
+========================================================= */
 
 @media (max-width: 420px) {
+
   .container {
     padding: 25px 12px 50px;
   }
 
   form {
-    padding: 16px;
+    padding: 17px;
   }
 
   textarea {
-    min-height: 130px;
+    min-height: 135px;
   }
 
   .score-section {
-    padding: 20px 14px;
+    padding: 22px 14px;
+  }
+
+  .score-circle {
+    width: 120px;
+    height: 120px;
+
+    font-size: 29px;
+  }
+
+  .sub-scores {
+    grid-template-columns: 1fr;
   }
 
   .keywords-details,
@@ -726,3 +1029,4 @@ li::marker {
     padding: 18px;
   }
 }
+```
