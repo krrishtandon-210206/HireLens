@@ -1,316 +1,299 @@
-```css
-/* =========================================================
-   RESUME AI — CLEAN MODERN UI
-========================================================= */
+/* =========================
+   DESIGN TOKENS & SYSTEM
+========================= */
 
 :root {
+  /* Surface & Base Colors */
   --bg: #f8fafc;
-  --surface: #ffffff;
-  --surface-2: #f1f5f9;
-
+  --card: #ffffff;
   --text: #0f172a;
-  --text-2: #334155;
   --muted: #64748b;
-
   --border: #e2e8f0;
 
-  --primary: #4f46e5;
-  --primary-dark: #4338ca;
-  --primary-soft: #eef2ff;
+  /* Brand / Primary Accent */
+  --accent: #4f46e5;
+  --accent-dark: #4338ca;
+  --accent-light: #eef2ff;
+  --accent-glow: rgba(79, 70, 229, 0.15);
 
-  --green: #16a34a;
-  --green-soft: #f0fdf4;
+  /* Status Colors */
+  --good: #16a34a;
+  --good-bg: #f0fdf4;
+  --good-border: #bbf7d0;
 
-  --red: #dc2626;
-  --red-soft: #fef2f2;
+  --bad: #dc2626;
+  --bad-bg: #fef2f2;
+  --bad-border: #fecaca;
 
-  --orange: #d97706;
-  --orange-soft: #fffbeb;
+  --warning: #d97706;
+  --warning-bg: #fffbeb;
+  --warning-border: #fef3c7;
 
-  --radius: 14px;
+  /* Layout & Depth */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
 
-  --shadow:
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 8px 25px rgba(15, 23, 42, 0.05);
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dark Mode Support (Automatic via OS preference) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --border: #334155;
 
-/* =========================================================
-   RESET
-========================================================= */
+    --accent: #6366f1;
+    --accent-dark: #4f46e5;
+    --accent-light: rgba(99, 102, 241, 0.12);
+    --accent-glow: rgba(99, 102, 241, 0.25);
 
-* {
+    --good-bg: rgba(22, 163, 74, 0.15);
+    --good-border: rgba(22, 163, 74, 0.3);
+
+    --bad-bg: rgba(220, 38, 38, 0.15);
+    --bad-border: rgba(220, 38, 38, 0.3);
+
+    --warning-bg: rgba(217, 119, 6, 0.15);
+    --warning-border: rgba(217, 119, 6, 0.3);
+  }
+}
+
+/* =========================
+   RESET & BASE STYLES
+========================= */
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-
   min-height: 100vh;
-
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
-  color: var(--text);
-
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background:
-    linear-gradient(
-      180deg,
-      #ffffff 0px,
-      #f8fafc 500px
-    );
-
-  line-height: 1.5;
+    radial-gradient(circle at 50% 0%, var(--accent-glow), transparent 45%),
+    var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Dynamic Focus Ring for Accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 
-/* =========================================================
-   PAGE
-========================================================= */
+/* =========================
+   CONTAINER
+========================= */
 
 .container {
-  width: min(100% - 32px, 920px);
-
-  margin: auto;
-
-  padding: 70px 0 100px;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 64px 20px 96px;
 }
 
-
-/* =========================================================
-   HERO
-========================================================= */
+/* =========================
+   HEADER
+========================= */
 
 h1 {
-  max-width: 720px;
-
-  margin: 0 auto;
-
-  text-align: center;
-
-  font-size: clamp(36px, 6vw, 54px);
-
-  line-height: 1.05;
-
-  letter-spacing: -2.5px;
-
+  margin: 0;
+  font-size: clamp(32px, 5vw, 44px);
   font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  line-height: 1.15;
 }
 
 .subtitle {
   max-width: 620px;
-
-  margin: 18px auto 42px;
-
-  text-align: center;
-
+  margin: 12px 0 36px;
   color: var(--muted);
-
-  font-size: 16px;
-
-  line-height: 1.7;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
-
-/* =========================================================
-   FORM
-========================================================= */
+/* =========================
+   FORM CARD
+========================= */
 
 form {
-  max-width: 760px;
-
-  margin: auto;
-
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   padding: 32px;
-
-  background: var(--surface);
-
+  background: var(--card);
   border: 1px solid var(--border);
-
-  border-radius: 18px;
-
-  box-shadow: var(--shadow);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
 }
+
+form:hover,
+form:focus-within {
+  box-shadow: var(--shadow-lg);
+}
+
+/* =========================
+   LABELS & INPUTS
+========================= */
 
 label {
-  display: block;
-
-  margin: 20px 0 8px;
-
-  color: var(--text);
-
-  font-size: 13px;
-
+  margin-top: 10px;
+  font-size: 0.85rem;
   font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  text-transform: uppercase;
 }
-
-
-/* =========================================================
-   FILE UPLOAD
-========================================================= */
 
 input[type="file"] {
   width: 100%;
-
-  padding: 24px;
-
-  border: 1.5px dashed #cbd5e1;
-
-  border-radius: 12px;
-
-  background: #f8fafc;
-
+  margin-top: 6px;
+  padding: 18px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  font-size: 0.9rem;
   color: var(--muted);
-
   cursor: pointer;
-
-  transition: 0.2s ease;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
 }
 
 input[type="file"]:hover {
-  border-color: var(--primary);
-
-  background: var(--primary-soft);
+  border-color: var(--accent);
+  background: var(--accent-light);
 }
-
-
-/* =========================================================
-   TEXTAREA
-========================================================= */
 
 textarea {
   width: 100%;
-
-  min-height: 180px;
-
-  padding: 15px;
-
+  min-height: 160px;
+  margin-top: 6px;
+  padding: 16px;
   border: 1px solid var(--border);
-
-  border-radius: 11px;
-
-  outline: none;
-
-  resize: vertical;
-
-  font-family: inherit;
-
-  font-size: 14px;
-
+  border-radius: var(--radius-md);
+  background: var(--card);
   color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  resize: vertical;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
 
-  background: white;
-
-  transition: 0.2s ease;
+textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
 }
 
 textarea:focus {
-  border-color: var(--primary);
-
-  box-shadow:
-    0 0 0 3px rgba(79, 70, 229, 0.08);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+  outline: none;
 }
 
-
-/* =========================================================
+/* =========================
    BUTTON
-========================================================= */
+========================= */
 
 button {
   width: 100%;
-
-  margin-top: 24px;
-
-  padding: 14px 20px;
-
-  border: 0;
-
-  border-radius: 10px;
-
-  background: var(--primary);
-
-  color: white;
-
+  margin-top: 20px;
+  padding: 14px 24px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  color: #ffffff;
   font-family: inherit;
-
-  font-size: 14px;
-
+  font-size: 0.95rem;
   font-weight: 700;
-
+  letter-spacing: 0.01em;
   cursor: pointer;
-
-  transition: 0.2s ease;
+  box-shadow: 0 4px 14px var(--accent-glow);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
 }
 
-button:hover {
-  background: var(--primary-dark);
-
+button:hover:not(:disabled) {
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
 
-  box-shadow:
-    0 8px 18px rgba(79, 70, 229, 0.2);
+button:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 button:disabled {
-  opacity: 0.5;
-
+  opacity: 0.6;
   cursor: not-allowed;
-
-  transform: none;
-
   box-shadow: none;
 }
 
+/* =========================
+   UTILITIES & MESSAGES
+========================= */
 
-/* =========================================================
-   LOADING
-========================================================= */
+.hidden {
+  display: none !important;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 16px;
+  background: var(--bad-bg);
+  color: var(--bad);
+  border: 1px solid var(--bad-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
 
 .loading {
-  width: fit-content;
-
-  margin: 20px auto;
-
-  padding: 10px 16px;
-
-  border: 1px solid var(--border);
-
-  border-radius: 999px;
-
-  background: white;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 16px;
   color: var(--muted);
-
-  font-size: 13px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
 }
 
 .loading::before {
   content: "";
-
-  display: inline-block;
-
-  width: 12px;
-  height: 12px;
-
-  margin-right: 8px;
-
-  vertical-align: -2px;
-
-  border: 2px solid #e2e8f0;
-
-  border-top-color: var(--primary);
-
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
   border-radius: 50%;
-
-  animation: spin 0.7s linear infinite;
+  animation: spin 0.6s linear infinite;
 }
 
 @keyframes spin {
@@ -319,449 +302,177 @@ button:disabled {
   }
 }
 
-
-/* =========================================================
-   ERROR
-========================================================= */
-
-.error {
-  margin-top: 18px;
-
-  padding: 14px 16px;
-
-  border: 1px solid #fecaca;
-
-  border-radius: 10px;
-
-  background: var(--red-soft);
-
-  color: var(--red);
-
-  font-size: 14px;
-}
-
-
-/* =========================================================
-   RESULTS
-========================================================= */
+/* =========================
+   RESULTS SECTION
+========================= */
 
 .results {
-  margin-top: 65px;
-
-  animation: resultsIn 0.4s ease;
+  margin-top: 48px;
+  animation: fadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes resultsIn {
+@keyframes fadeUp {
   from {
     opacity: 0;
-
-    transform: translateY(12px);
+    transform: translateY(16px);
   }
-
   to {
     opacity: 1;
-
     transform: translateY(0);
   }
 }
 
-
-/* =========================================================
-   SCORE HERO
-========================================================= */
+/* =========================
+   SCORE DISPLAY
+========================= */
 
 .score-section {
-  position: relative;
-
-  display: grid;
-
-  grid-template-columns: 240px 1fr;
-
+  display: flex;
   align-items: center;
-
-  gap: 35px;
-
-  padding: 35px;
-
-  background: white;
-
+  gap: 32px;
+  padding: 32px;
+  background: var(--card);
   border: 1px solid var(--border);
-
-  border-radius: 18px;
-
-  box-shadow: var(--shadow);
-
-  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 24px;
 }
-
-
-/* =========================================================
-   SCORE
-========================================================= */
 
 .score-circle {
   position: relative;
-
-  width: 170px;
-  height: 170px;
-
-  margin: auto;
-
+  min-width: 120px;
+  width: 120px;
+  height: 120px;
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      white 63%,
-      transparent 64%
-    );
-
-  font-size: 42px;
-
-  font-weight: 800;
-
-  letter-spacing: -2px;
-
+  border: 6px solid var(--accent);
+  background: var(--accent-light);
   color: var(--text);
-}
-
-
-/* score ring */
-
-.score-circle::before {
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  border-radius: 50%;
-
-  background:
-    conic-gradient(
-      var(--primary) 0deg 295deg,
-      #e2e8f0 295deg 360deg
-    );
-
-  -webkit-mask:
-    radial-gradient(
-      farthest-side,
-      transparent calc(100% - 10px),
-      #000 calc(100% - 9px)
-    );
-
-  mask:
-    radial-gradient(
-      farthest-side,
-      transparent calc(100% - 10px),
-      #000 calc(100% - 9px)
-    );
+  font-size: 2.2rem;
+  font-weight: 800;
+  box-shadow: 0 0 0 4px var(--accent-glow);
 }
 
 .score-max {
-  position: absolute;
-
-  margin-top: 55px;
-
-  font-size: 12px;
-
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--muted);
-
-  font-weight: 500;
+  margin-left: 2px;
 }
-
-
-/* =========================================================
-   SCORE INFORMATION
-========================================================= */
-
-.score-section h2 {
-  margin: 0 0 7px;
-
-  font-size: 24px;
-
-  letter-spacing: -0.5px;
-}
-
-.score-section p {
-  margin: 0 0 20px;
-
-  color: var(--muted);
-
-  font-size: 14px;
-}
-
-
-/* =========================================================
-   SUB SCORE GRID
-========================================================= */
 
 .sub-scores {
+  flex: 1;
   display: grid;
-
   grid-template-columns: repeat(2, 1fr);
-
-  gap: 10px;
+  gap: 12px;
 }
 
 .sub-score-item {
-  padding: 13px 15px;
-
-  background: var(--surface-2);
-
-  border-radius: 10px;
-
-  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
 }
 
 .sub-score-item span.label {
-  display: block;
-
-  margin-bottom: 3px;
-
   color: var(--muted);
-
-  font-size: 11px;
-
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .sub-score-item span.value {
-  font-size: 17px;
-
-  font-weight: 800;
-
   color: var(--text);
+  font-weight: 700;
 }
 
-
-/* =========================================================
-   SECTION TITLE
-========================================================= */
+/* =========================
+   HEADINGS & CONTENT
+========================= */
 
 h2 {
-  margin: 45px 0 16px;
-
-  font-size: 22px;
-
+  margin: 40px 0 16px;
+  font-size: 1.35rem;
   font-weight: 800;
-
-  letter-spacing: -0.6px;
+  letter-spacing: -0.02em;
 }
 
 h3 {
-  margin: 0 0 10px;
-
-  font-size: 14px;
-
-  font-weight: 750;
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
 }
 
-
-/* =========================================================
-   STRENGTH / WEAKNESS
-========================================================= */
-
+/* Columns */
 .columns {
   display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
 .column {
-  position: relative;
-
   padding: 24px;
-
-  background: white;
-
+  background: var(--card);
   border: 1px solid var(--border);
-
-  border-radius: 14px;
-
-  box-shadow: var(--shadow);
-
-  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-
-/* green card */
-
-.column:first-child {
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff,
-      #fafffb
-    );
+.column:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-.column:first-child::before {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  top: 0;
-
-  width: 4px;
-  height: 100%;
-
-  background: var(--green);
-}
-
-
-/* red card */
-
-.column:last-child {
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff,
-      #fffafa
-    );
-}
-
-.column:last-child::before {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  top: 0;
-
-  width: 4px;
-  height: 100%;
-
-  background: var(--red);
-}
-
-.column:first-child h3 {
-  color: var(--green);
-}
-
-.column:last-child h3 {
-  color: var(--red);
-}
-
-
-/* =========================================================
-   LISTS
-========================================================= */
-
+/* Lists */
 ul {
   margin: 0;
-
-  padding-left: 19px;
+  padding-left: 20px;
 }
 
 li {
   margin-bottom: 10px;
-
-  color: var(--text-2);
-
-  font-size: 14px;
-
+  font-size: 0.92rem;
   line-height: 1.6;
 }
 
-li::marker {
-  color: var(--primary);
+li:last-child {
+  margin-bottom: 0;
 }
 
-
-/* =========================================================
-   SUGGESTIONS
-========================================================= */
+li::marker {
+  color: var(--accent);
+}
 
 #suggestions-list {
-  display: grid;
-
-  gap: 10px;
-
   margin: 0;
-
-  padding: 0;
-
-  list-style: none;
-}
-
-#suggestions-list li {
-  position: relative;
-
-  margin: 0;
-
-  padding: 17px 18px 17px 46px;
-
-  background: white;
-
+  padding: 24px 24px 24px 44px;
+  background: var(--card);
   border: 1px solid var(--border);
-
-  border-radius: 11px;
-
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.02);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
-#suggestions-list li::before {
-  content: "✓";
-
-  position: absolute;
-
-  left: 16px;
-  top: 16px;
-
-  width: 22px;
-  height: 22px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  background: var(--primary-soft);
-
-  color: var(--primary);
-
-  font-size: 12px;
-
-  font-weight: 800;
-}
-
-
-/* =========================================================
-   AI BADGE
-========================================================= */
-
+/* AI Feedback Badge & Box */
 .ai-banner {
   display: inline-flex;
-
   align-items: center;
-
   gap: 6px;
-
-  padding: 6px 10px;
-
+  margin-top: 20px;
+  padding: 4px 10px;
   border-radius: 999px;
-
-  background: var(--primary-soft);
-
-  color: var(--primary);
-
-  font-size: 10px;
-
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 0.72rem;
   font-weight: 800;
-
-  letter-spacing: 0.5px;
-
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
@@ -769,167 +480,83 @@ li::marker {
   content: "✦";
 }
 
-
-/* =========================================================
-   AI FEEDBACK
-========================================================= */
-
 .ai-feedback {
-  max-width: 720px;
-
-  margin: 12px 0 0;
-
+  margin: 10px 0 0;
   color: var(--muted);
-
-  font-size: 14px;
-
-  line-height: 1.7;
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
 
-
-/* =========================================================
-   KEYWORDS
-========================================================= */
+/* =========================
+   KEYWORDS & CHIPS
+========================= */
 
 .keywords-details {
-  margin-top: 18px;
-
+  margin-top: 24px;
   padding: 24px;
-
-  background: white;
-
+  background: var(--card);
   border: 1px solid var(--border);
-
-  border-radius: 14px;
-
-  box-shadow: var(--shadow);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 .chip-list {
   display: flex;
-
   flex-wrap: wrap;
-
-  gap: 7px;
+  gap: 8px;
 }
 
 .chip {
-  padding: 6px 10px;
-
-  border-radius: 7px;
-
-  background: var(--primary-soft);
-
-  color: var(--primary);
-
-  border: 1px solid #e0e7ff;
-
-  font-size: 12px;
-
-  font-weight: 650;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .chip.missing {
-  background: var(--red-soft);
-
-  color: var(--red);
-
-  border-color: #fecaca;
+  background: var(--bad-bg);
+  color: var(--bad);
+  border-color: var(--bad-border);
 }
 
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
 
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 700px) {
-
+@media (max-width: 768px) {
   .container {
-    width: min(100% - 24px, 600px);
-
-    padding-top: 45px;
-  }
-
-  h1 {
-    font-size: 38px;
-
-    letter-spacing: -1.8px;
-  }
-
-  .subtitle {
-    font-size: 15px;
-
-    margin-bottom: 30px;
+    padding: 32px 16px 64px;
   }
 
   form {
-    padding: 22px;
+    padding: 20px;
   }
 
   .score-section {
-    grid-template-columns: 1fr;
-
-    gap: 25px;
-
-    padding: 28px 20px;
-
+    flex-direction: column;
     text-align: center;
+    padding: 24px;
   }
 
   .score-circle {
-    width: 145px;
-    height: 145px;
-
-    font-size: 35px;
+    min-width: 110px;
+    width: 110px;
+    height: 110px;
+    font-size: 1.8rem;
   }
 
-  .sub-scores {
-    text-align: left;
-  }
-
+  .sub-scores,
   .columns {
     grid-template-columns: 1fr;
+    width: 100%;
   }
 
-  h2 {
-    margin-top: 35px;
-  }
-}
-
-
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (max-width: 430px) {
-
-  .container {
-    width: min(100% - 20px, 400px);
-
-    padding-top: 35px;
-  }
-
-  h1 {
-    font-size: 32px;
-  }
-
-  form {
-    padding: 18px;
-  }
-
-  .sub-scores {
-    grid-template-columns: 1fr;
-  }
-
-  .score-section {
-    padding: 22px 16px;
-  }
-
-  .score-circle {
-    width: 125px;
-    height: 125px;
-
-    font-size: 30px;
+  #suggestions-list {
+    padding: 20px 20px 20px 36px;
   }
 }
-```
