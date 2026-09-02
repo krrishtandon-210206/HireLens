@@ -323,97 +323,75 @@ button:disabled {
 }
 
 /* =========================
-   SCORE DISPLAY
+   SCORE DISPLAY (CENTERED WITH PROGRESS RING)
 ========================= */
 
 .score-section {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 32px;
-  padding: 32px;
+  justify-content: center;
+  gap: 28px;
+  padding: 36px 32px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   margin-bottom: 24px;
+  text-align: center;
 }
 
+/* Conic gradient ring wrapping the circle wrapper */
 .score-circle {
+  --score-pct: 52%; /* Match your dynamic score percentage */
+  
   position: relative;
-
-  min-width: 125px;
-  width: 125px;
-  height: 125px;
-
+  min-width: 140px;
+  width: 140px;
+  height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 50%;
+  
+  /* Outer circular track & progress ring */
+  background: conic-gradient(
+    var(--accent) 0% var(--score-pct),
+    var(--accent-light) var(--score-pct) 100%
+  );
+  
+  padding: 8px; /* Thickness of the progress ring */
+  box-shadow: 0 0 0 6px var(--accent-glow);
+  transition: background var(--transition-normal);
+}
 
-  border: 8px solid var(--accent);
+/* Inner card background to form the ring cut-out */
+.score-circle::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: var(--card);
+  z-index: 1;
+}
 
-  background:
-    radial-gradient(
-      circle,
-      #ffffff 55%,
-      var(--accent-light) 56%,
-      var(--accent-light) 100%
-    );
+/* Score text content placed on top of the inner card */
+.score-circle > * {
+  position: relative;
+  z-index: 2;
+}
 
+.score-circle {
   color: var(--text);
-
-  font-size: 32px;
+  font-size: 2.4rem;
   font-weight: 800;
-
-  box-shadow:
-    0 0 0 5px rgba(79, 70, 229, 0.08);
 }
 
 .score-max {
-  margin-left: 3px;
-
-  font-size: 13px;
-  font-weight: 500;
-
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--muted);
-}
-
-/* =========================
-   SUB SCORES
-========================= */
-
-.sub-scores {
-  flex: 1;
-
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-
-  gap: 12px;
-}
-
-.sub-score-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  padding: 11px 13px;
-
-  background: #f9fafb;
-
-  border: 1px solid #f0f0f0;
-  border-radius: 8px;
-
-  font-size: 13px;
-}
-
-.sub-score-item span.label {
-  color: var(--muted);
-}
-
-.sub-score-item span.value {
-  color: var(--text);
-  font-weight: 700;
+  margin-left: 2px;
 }
 
 /* =========================
