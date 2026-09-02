@@ -1,116 +1,75 @@
-/* =========================
-   DESIGN TOKENS & SYSTEM
-========================= */
-
 :root {
-  /* Surface & Base Colors */
-  --bg: #f8fafc;
+  --bg: #f5f7fb;
   --card: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --border: #e2e8f0;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
 
-  /* Brand / Primary Accent */
   --accent: #4f46e5;
   --accent-dark: #4338ca;
   --accent-light: #eef2ff;
-  --accent-glow: rgba(79, 70, 229, 0.15);
 
-  /* Status Colors */
   --good: #16a34a;
   --good-bg: #f0fdf4;
-  --good-border: #bbf7d0;
 
   --bad: #dc2626;
   --bad-bg: #fef2f2;
-  --bad-border: #fecaca;
 
   --warning: #d97706;
   --warning-bg: #fffbeb;
-  --warning-border: #fef3c7;
 
-  /* Layout & Depth */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
-  --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
-
-  /* Transitions */
-  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Dark Mode Support (Automatic via OS preference) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f172a;
-    --card: #1e293b;
-    --text: #f8fafc;
-    --muted: #94a3b8;
-    --border: #334155;
-
-    --accent: #6366f1;
-    --accent-dark: #4f46e5;
-    --accent-light: rgba(99, 102, 241, 0.12);
-    --accent-glow: rgba(99, 102, 241, 0.25);
-
-    --good-bg: rgba(22, 163, 74, 0.15);
-    --good-border: rgba(22, 163, 74, 0.3);
-
-    --bad-bg: rgba(220, 38, 38, 0.15);
-    --bad-border: rgba(220, 38, 38, 0.3);
-
-    --warning-bg: rgba(217, 119, 6, 0.15);
-    --warning-border: rgba(217, 119, 6, 0.3);
-  }
+  --radius: 14px;
+  --shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 12px 35px rgba(15, 23, 42, 0.1);
 }
 
 /* =========================
-   RESET & BASE STYLES
+   RESET
 ========================= */
 
-*,
-*::before,
-*::after {
+* {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background:
-    radial-gradient(circle at 50% 0%, var(--accent-glow), transparent 45%),
-    var(--bg);
-  color: var(--text);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
-/* Dynamic Focus Ring for Accessibility */
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(79, 70, 229, 0.08),
+      transparent 35%
+    ),
+    var(--bg);
+
+  color: var(--text);
+  line-height: 1.5;
 }
 
 /* =========================
-   CONTAINER
+   MAIN CONTAINER
 ========================= */
 
 .container {
   width: 100%;
-  max-width: 860px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 64px 20px 96px;
+  padding: 55px 24px 80px;
 }
 
 /* =========================
@@ -119,19 +78,22 @@ body {
 
 h1 {
   margin: 0;
-  font-size: clamp(32px, 5vw, 44px);
+
+  font-size: clamp(30px, 5vw, 42px);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -1.5px;
+
   color: var(--text);
-  line-height: 1.15;
 }
 
 .subtitle {
-  max-width: 620px;
-  margin: 12px 0 36px;
+  max-width: 650px;
+
+  margin: 10px 0 32px;
+
   color: var(--muted);
-  font-size: 1.05rem;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.7;
 }
 
 /* =========================
@@ -141,44 +103,60 @@ h1 {
 form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 32px;
+  gap: 8px;
+
+  padding: 28px;
+
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow);
+
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
-form:hover,
-form:focus-within {
-  box-shadow: var(--shadow-lg);
+form:hover {
+  box-shadow: var(--shadow-hover);
 }
 
 /* =========================
-   LABELS & INPUTS
+   LABELS
 ========================= */
 
 label {
-  margin-top: 10px;
-  font-size: 0.85rem;
+  margin-top: 14px;
+
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.01em;
   color: var(--text);
-  text-transform: uppercase;
 }
+
+/* =========================
+   FILE INPUT
+========================= */
 
 input[type="file"] {
   width: 100%;
-  margin-top: 6px;
-  padding: 18px;
-  border: 2px dashed var(--border);
-  border-radius: var(--radius-md);
-  background: var(--bg);
-  font-size: 0.9rem;
+
+  margin-top: 4px;
+  padding: 14px;
+
+  border: 2px dashed #d1d5db;
+  border-radius: 10px;
+
+  background: #fafafa;
+
+  font-size: 14px;
   color: var(--muted);
+
   cursor: pointer;
-  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
 }
 
 input[type="file"]:hover {
@@ -186,31 +164,46 @@ input[type="file"]:hover {
   background: var(--accent-light);
 }
 
+/* =========================
+   TEXTAREA
+========================= */
+
 textarea {
   width: 100%;
   min-height: 160px;
-  margin-top: 6px;
-  padding: 16px;
+
+  margin-top: 4px;
+  padding: 14px 16px;
+
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--card);
+  border-radius: 10px;
+
+  background: #fff;
+
   color: var(--text);
+
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 14px;
   line-height: 1.6;
+
   resize: vertical;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 textarea::placeholder {
-  color: var(--muted);
-  opacity: 0.7;
+  color: #9ca3af;
 }
 
 textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
-  outline: none;
+
+  box-shadow:
+    0 0 0 3px rgba(79, 70, 229, 0.12);
 }
 
 /* =========================
@@ -219,81 +212,118 @@ textarea:focus {
 
 button {
   width: 100%;
-  margin-top: 20px;
-  padding: 14px 24px;
+
+  margin-top: 22px;
+  padding: 13px 20px;
+
   border: none;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-  color: #ffffff;
+  border-radius: 10px;
+
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    var(--accent-dark)
+  );
+
+  color: white;
+
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.01em;
+
   cursor: pointer;
-  box-shadow: 0 4px 14px var(--accent-glow);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
+
+  box-shadow:
+    0 5px 15px rgba(79, 70, 229, 0.25);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
 }
 
-button:hover:not(:disabled) {
+button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px var(--accent-glow);
+
+  box-shadow:
+    0 8px 20px rgba(79, 70, 229, 0.3);
 }
 
-button:active:not(:disabled) {
+button:active {
   transform: translateY(0);
 }
 
 button:disabled {
-  opacity: 0.6;
+  opacity: 0.55;
   cursor: not-allowed;
+  transform: none;
   box-shadow: none;
 }
 
 /* =========================
-   UTILITIES & MESSAGES
+   UTILITY
 ========================= */
 
 .hidden {
   display: none !important;
 }
 
+/* =========================
+   ERROR
+========================= */
+
 .error {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 20px;
-  padding: 16px;
+  align-items: flex-start;
+  gap: 10px;
+
+  margin-top: 18px;
+  padding: 14px 16px;
+
   background: var(--bad-bg);
+
   color: var(--bad);
-  border: 1px solid var(--bad-border);
-  border-radius: var(--radius-md);
-  font-size: 0.9rem;
-  font-weight: 500;
+
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+
+  font-size: 14px;
+  line-height: 1.5;
 }
+
+/* =========================
+   LOADING
+========================= */
 
 .loading {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  margin-top: 24px;
-  padding: 16px;
+  gap: 10px;
+
+  margin-top: 20px;
+  padding: 14px;
+
   color: var(--muted);
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 14px;
+
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: 10px;
 }
 
 .loading::before {
   content: "";
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--border);
+
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid #e5e7eb;
   border-top-color: var(--accent);
+
   border-radius: 50%;
-  animation: spin 0.6s linear infinite;
+
+  animation: spin 0.7s linear infinite;
 }
 
 @keyframes spin {
@@ -303,19 +333,21 @@ button:disabled {
 }
 
 /* =========================
-   RESULTS SECTION
+   RESULTS
 ========================= */
 
 .results {
-  margin-top: 48px;
-  animation: fadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 40px;
+
+  animation: fadeUp 0.4s ease;
 }
 
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -323,20 +355,29 @@ button:disabled {
 }
 
 /* =========================
-   SCORE DISPLAY
+   SCORE SECTION
 ========================= */
 
 .score-section {
   display: flex;
   align-items: center;
-  gap: 32px;
-  padding: 32px;
+  gap: 30px;
+
+  padding: 28px;
+
   background: var(--card);
+
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow);
+
   margin-bottom: 24px;
 }
+
+/* =========================
+   SCORE CIRCLE
+========================= */
 
 .score-circle {
   position: relative;
@@ -417,47 +458,67 @@ button:disabled {
 }
 
 /* =========================
-   HEADINGS & CONTENT
+   SECTION HEADINGS
 ========================= */
 
 h2 {
-  margin: 40px 0 16px;
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  margin: 35px 0 14px;
+
+  font-size: 21px;
+  font-weight: 750;
+
+  letter-spacing: -0.4px;
 }
 
 h3 {
-  margin: 0 0 12px;
-  font-size: 0.85rem;
+  margin: 0 0 10px;
+
+  font-size: 14px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
+
   color: var(--muted);
 }
 
-/* Columns */
+/* =========================
+   TWO COLUMN LAYOUT
+========================= */
+
 .columns {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+
+  grid-template-columns: 1fr 1fr;
+
   gap: 20px;
 }
 
+/* =========================
+   RESULT COLUMNS
+========================= */
+
 .column {
-  padding: 24px;
+  padding: 22px;
+
   background: var(--card);
+
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .column:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-hover);
 }
 
-/* Lists */
+/* =========================
+   LISTS
+========================= */
+
 ul {
   margin: 0;
   padding-left: 20px;
@@ -465,65 +526,95 @@ ul {
 
 li {
   margin-bottom: 10px;
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
 
-li:last-child {
-  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 li::marker {
   color: var(--accent);
 }
 
+/* =========================
+   SUGGESTIONS
+========================= */
+
 #suggestions-list {
   margin: 0;
-  padding: 24px 24px 24px 44px;
+
+  padding: 20px 22px 20px 40px;
+
   background: var(--card);
+
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow);
 }
 
-/* AI Feedback Badge & Box */
+#suggestions-list li {
+  padding-left: 3px;
+}
+
+/* =========================
+   AI BADGE
+========================= */
+
 .ai-banner {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+
   margin-top: 20px;
-  padding: 4px 10px;
+
+  padding: 6px 11px;
+
   border-radius: 999px;
+
   background: var(--accent-light);
+
   color: var(--accent);
-  font-size: 0.72rem;
+
+  font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.04em;
+
+  letter-spacing: 0.3px;
   text-transform: uppercase;
 }
 
 .ai-banner::before {
   content: "✦";
-}
-
-.ai-feedback {
-  margin: 10px 0 0;
-  color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.6;
+  font-size: 11px;
 }
 
 /* =========================
-   KEYWORDS & CHIPS
+   AI FEEDBACK
+========================= */
+
+.ai-feedback {
+  margin: 10px 0 0;
+
+  color: var(--muted);
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* =========================
+   KEYWORDS
 ========================= */
 
 .keywords-details {
   margin-top: 24px;
-  padding: 24px;
+
+  padding: 22px;
+
   background: var(--card);
+
   border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow);
 }
 
 .chip-list {
@@ -535,28 +626,39 @@ li::marker {
 .chip {
   display: inline-flex;
   align-items: center;
-  padding: 6px 12px;
+
+  padding: 6px 11px;
+
   border-radius: 999px;
+
   background: var(--accent-light);
+
   color: var(--accent);
-  border: 1px solid var(--border);
-  font-size: 0.8rem;
+
+  border: 1px solid rgba(79, 70, 229, 0.1);
+
+  font-size: 12px;
   font-weight: 600;
 }
 
 .chip.missing {
   background: var(--bad-bg);
   color: var(--bad);
-  border-color: var(--bad-border);
+
+  border-color: #fecaca;
 }
 
 /* =========================
-   RESPONSIVE DESIGN
+   MOBILE
 ========================= */
 
-@media (max-width: 768px) {
+@media (max-width: 700px) {
+  body {
+    padding: 0;
+  }
+
   .container {
-    padding: 32px 16px 64px;
+    padding: 35px 16px 60px;
   }
 
   form {
@@ -565,24 +667,62 @@ li::marker {
 
   .score-section {
     flex-direction: column;
+
     text-align: center;
-    padding: 24px;
+
+    padding: 24px 18px;
   }
 
   .score-circle {
     min-width: 110px;
     width: 110px;
     height: 110px;
-    font-size: 1.8rem;
+
+    font-size: 28px;
   }
 
-  .sub-scores,
+  .sub-scores {
+    width: 100%;
+
+    grid-template-columns: 1fr;
+  }
+
   .columns {
     grid-template-columns: 1fr;
-    width: 100%;
   }
 
+  .column {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+}
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 420px) {
+  .container {
+    padding: 25px 12px 50px;
+  }
+
+  form {
+    padding: 16px;
+  }
+
+  textarea {
+    min-height: 130px;
+  }
+
+  .score-section {
+    padding: 20px 14px;
+  }
+
+  .keywords-details,
   #suggestions-list {
-    padding: 20px 20px 20px 36px;
+    padding: 18px;
   }
 }
