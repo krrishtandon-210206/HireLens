@@ -1,133 +1,134 @@
 # ATS Resume Analyzer
 
-A simple project that scores a resume against a job description and gives
-you an ATS score, strengths, weaknesses, and concrete rewrite suggestions.
-No external API keys or paid services needed — the scoring is rule-based.
+> Analyze your resume against a job description, get an ATS compatibility score, identify strengths and weaknesses, and receive actionable suggestions to improve your resume.
 
-## File Structure
+🌐 **Live Demo:** https://hire-lens-xi-nine.vercel.app/
 
-```
-ats-resume-analyzer/
-├── backend/
-│   ├── main.py             # FastAPI app, exposes POST /analyze
-│   ├── resume_parser.py    # Extracts text from .pdf / .docx / .txt
-│   ├── ats_scorer.py       # Keyword matching, formatting checks, scoring logic
-│   ├── gemini_analyzer.py  # Optional: Gemini-powered weak-point analysis + rewrites
-│   ├── .env.example        # Copy to .env and add your Gemini API key
-│   └── requirements.txt
-├── frontend/
-│   ├── index.html          # Upload form + results UI
-│   ├── style.css
-│   └── script.js           # Calls the backend API, renders results
-└── README.md
-```
+---
 
-## How it works
+## 📌 Overview
 
-1. You upload a resume file and paste a job description.
-2. The backend extracts plain text from the resume (PDF/DOCX/TXT).
-3. It pulls likely keywords/skills out of the job description by frequency.
-4. It compares those keywords against your resume, checks for standard
-   resume sections, scans bullet points for weak phrasing
-   ("responsible for", "worked on") vs. strong action verbs, and checks
-   whether bullets include quantified results (%, $, numbers).
-5. It combines these into an overall ATS score (0–100), plus a breakdown:
-   - Keyword Match (45%)
-   - Formatting / sections present (20%)
-   - Action verb usage (20%)
-   - Quantified impact (15%)
-6. It returns strengths, weaknesses, and specific reframing suggestions
-   for weak bullet points.
-7. **If a Gemini API key is configured**, the weak/unquantified bullets
-   found in step 4 are sent to Gemini, which explains *why* each one is
-   weak relative to the job description and rewrites it with a strong
-   verb + quantified-impact placeholder. If no key is set (or the call
-   fails for any reason — bad key, no internet, rate limit), the app
-   automatically falls back to the rule-based template suggestions —
-   nothing breaks either way.
+ATS Resume Analyzer is a lightweight resume analysis tool that evaluates how well a resume matches a specific job description.
 
-## Setup
+Instead of relying entirely on expensive AI APIs, the core analysis uses a **rule-based scoring engine** that checks keywords, resume structure, action verbs, and quantified achievements.
 
-### 1. Backend
+The application can optionally use **Google Gemini** to provide more detailed explanations and rewrite weak resume bullet points.
 
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
+### What it helps you answer
 
-**Optional — enable Gemini-powered rewrites:**
-1. Get a free API key at https://aistudio.google.com/apikey
-2. Copy `.env.example` to `.env`: `cp .env.example .env`
-3. Paste your key into `.env` as `GEMINI_API_KEY=...`
+- How well does my resume match this job?
+- Which skills from the job description are missing?
+- What are the strongest parts of my resume?
+- What weaknesses could reduce my ATS score?
+- Which bullet points should I rewrite?
+- How can I make my achievements more measurable?
 
-Without this step, the app still works fully — it just uses the
-rule-based template suggestions instead of Gemini's rewrites.
+---
 
-```bash
-uvicorn main:app --reload --port 8000
-```
+## 🚀 Live Demo
 
-The API will be live at `http://127.0.0.1:8000`. You can check
-`http://127.0.0.1:8000/health` to confirm it's running, and
-`http://127.0.0.1:8000/docs` for interactive API docs.
+Try the application:
 
-### 2. Frontend
+**https://hire-lens-xi-nine.vercel.app/**
 
-No build step needed — it's plain HTML/CSS/JS.
+Upload a resume, paste a job description, and receive an analysis within seconds.
 
-Just open `frontend/index.html` directly in your browser, or serve it:
+---
 
-```bash
-cd frontend
-python -m http.server 5500
-```
+## ✨ Features
 
-Then visit `http://127.0.0.1:5500`.
+### 📊 ATS Compatibility Score
 
-> If your backend runs on a different host/port, update `API_URL` at the
-> top of `frontend/script.js`.
+Generates an overall score from **0–100** based on multiple resume factors.
 
-## API
+### 🔑 Keyword Matching
 
-**POST** `/analyze`
-Form-data fields:
-- `resume` — file upload (.pdf, .docx, or .txt)
-- `job_description` — string (plain text)
+Extracts relevant skills and keywords from the job description and compares them against the resume.
 
-Returns JSON:
-```json
-{
-  "overall_score": 72,
-  "sub_scores": {
-    "keyword_match": 65,
-    "formatting": 80,
-    "action_verbs": 75,
-    "quantification": 60
-  },
-  "matched_keywords": ["python", "fastapi", "..."],
-  "missing_keywords": ["kubernetes", "..."],
-  "strengths": ["..."],
-  "weaknesses": ["..."],
-  "suggestions": ["..."],
-  "ai_powered": true,
-  "ai_overall_feedback": "2-3 sentences from Gemini on the weak points overall",
-  "ai_bullet_rewrites": [
-    {"original": "...", "issue": "...", "rewrite": "..."}
-  ]
-}
-```
+Shows:
 
-`ai_powered`, `ai_overall_feedback`, and `ai_bullet_rewrites` are only
-present when a `GEMINI_API_KEY` is configured and the call succeeds.
+- Matched keywords
+- Missing keywords
+- Keyword match percentage
 
-## Ideas for extending this later
+### 📄 Resume Structure Analysis
 
-- Swap the rule-based keyword extraction for a proper NLP library (spaCy)
-  or embeddings to catch synonyms (resume says "ML", JD says "machine learning").
-- Try a different Gemini model via the `GEMINI_MODEL` env var (defaults to
-  `gemini-2.5-flash`) if you want faster/cheaper or more capable output.
-- Store analysis history per user with a small SQLite database.
-- Support multiple job descriptions to compare one resume against several
-  postings at once.
+Checks for commonly expected resume sections such as:
+
+- Education
+- Experience
+- Projects
+- Skills
+- Certifications
+- Contact information
+
+### 💪 Strength Analysis
+
+Identifies positive aspects of the resume, such as:
+
+- Strong keyword coverage
+- Good use of action verbs
+- Quantified achievements
+- Relevant technical skills
+- Proper resume structure
+
+### ⚠️ Weakness Detection
+
+Detects issues such as:
+
+- Missing job-specific keywords
+- Weak action verbs
+- Generic descriptions
+- Unquantified achievements
+- Missing resume sections
+
+### ✍️ Resume Rewriting Suggestions
+
+Provides concrete suggestions for improving weak bullet points.
+
+For example:
+
+**Before**
+
+> Worked on a web application using React.
+
+**Suggested**
+
+> Developed a React-based web application that improved [metric] by [X%] and reduced [process/time] by [Y%].
+
+The system encourages measurable impact rather than simply listing responsibilities.
+
+### 🤖 Optional Gemini Analysis
+
+If a Gemini API key is configured, Gemini analyzes weak resume bullets and provides:
+
+- Explanation of the problem
+- Job-specific reasoning
+- Improved bullet point
+- Quantified-impact placeholders
+
+If Gemini is unavailable, the application automatically falls back to the built-in rule-based suggestions.
+
+---
+
+## 🧮 Scoring System
+
+The ATS score is calculated using four major components:
+
+| Category | Weight |
+|---|---:|
+| 🔑 Keyword Match | 45% |
+| 📄 Formatting & Sections | 20% |
+| ⚡ Action Verbs | 20% |
+| 📈 Quantified Impact | 15% |
+| **Total** | **100%** |
+
+### Example
+
+```text
+Keyword Match       72
+Formatting          90
+Action Verbs        80
+Quantification      60
+
+Overall ATS Score   76
