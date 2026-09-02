@@ -6,6 +6,10 @@ const submitBtn = document.getElementById("submit-btn");
 const errorBox = document.getElementById("error");
 const loadingBox = document.getElementById("loading");
 const resultsBox = document.getElementById("results");
+const scoreElement = document.querySelector('.score-circle');
+const score = 52; // Target score out of 100
+
+scoreElement.style.setProperty('--score-pct', `${score}%`);
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
