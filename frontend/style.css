@@ -340,32 +340,55 @@ button:disabled {
 
 .score-circle {
   position: relative;
-  min-width: 120px;
-  width: 120px;
-  height: 120px;
+
+  min-width: 125px;
+  width: 125px;
+  height: 125px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   border-radius: 50%;
-  border: 6px solid var(--accent);
-  background: var(--accent-light);
+
+  border: 8px solid var(--accent);
+
+  background:
+    radial-gradient(
+      circle,
+      #ffffff 55%,
+      var(--accent-light) 56%,
+      var(--accent-light) 100%
+    );
+
   color: var(--text);
-  font-size: 2.2rem;
+
+  font-size: 32px;
   font-weight: 800;
-  box-shadow: 0 0 0 4px var(--accent-glow);
+
+  box-shadow:
+    0 0 0 5px rgba(79, 70, 229, 0.08);
 }
 
 .score-max {
-  font-size: 0.85rem;
-  font-weight: 600;
+  margin-left: 3px;
+
+  font-size: 13px;
+  font-weight: 500;
+
   color: var(--muted);
-  margin-left: 2px;
 }
+
+/* =========================
+   SUB SCORES
+========================= */
 
 .sub-scores {
   flex: 1;
+
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
+
   gap: 12px;
 }
 
@@ -373,16 +396,19 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  font-size: 0.88rem;
+
+  padding: 11px 13px;
+
+  background: #f9fafb;
+
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+
+  font-size: 13px;
 }
 
 .sub-score-item span.label {
   color: var(--muted);
-  font-weight: 500;
 }
 
 .sub-score-item span.value {
