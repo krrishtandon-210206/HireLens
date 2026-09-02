@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ATS Resume Analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="sheet">
+    <header class="masthead">
+      <h1>ATS Resume Analyzer</h1>
+      <p class="dek">Upload a resume and a job description. Get back a score, a margin of notes on what's working, and specific rewrites for what isn't.</p>
+    </header>
+
+    <form id="analyze-form">
+      <div class="field">
+        <label for="resume-file">Resume</label>
+        <input type="file" id="resume-file" name="resume" accept=".pdf,.docx,.txt" required />
+        <span class="hint">.pdf, .docx, or .txt</span>
+      </div>
+
+      <div class="field">
+        <label for="job-description">Job description</label>
+        <textarea id="job-description" name="job_description" rows="9" placeholder="Paste the full job posting here..." required></textarea>
+      </div>
+
+      <button type="submit" id="submit-btn">Analyze resume</button>
+    </form>
+
+    <p id="error" class="error hidden"></p>
+    <p id="loading" class="loading hidden">Reading your resume against the posting…</p>
+
+    <section id="results" class="results hidden">
+
+      <div class="verdict">
+        <div class="stamp">
+          <span id="overall-score">0</span>
+          <span class="stamp-max">/100</span>
+        </div>
+        <dl class="breakdown" id="sub-scores"></dl>
+      </div>
+
+      <div class="margin-block strengths">
+        <h2>What's working</h2>
+        <ul id="strengths-list"></ul>
+      </div>
+
+      <div class="margin-block weaknesses">
+        <h2>What's not</h2>
+        <ul id="weaknesses-list"></ul>
+      </div>
+
+      <div class="suggestions-block">
+        <h2>Rewrite notes</h2>
+        <div id="ai-banner" class="ai-banner hidden"></div>
+        <p id="ai-overall-feedback" class="ai-feedback hidden"></p>
+        <ol id="suggestions-list"></ol>
+      </div>
+
+      <details class="keywords-details">
+        <summary>Matched vs. missing keywords</summary>
+        <div class="keyword-columns">
+          <div>
+            <h3>Found in your resume</h3>
+            <ul id="matched-keywords" class="tag-list matched"></ul>
+          </div>
+          <div>
+            <h3>Missing</h3>
+            <ul id="missing-keywords" class="tag-list missing"></ul>
+          </div>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
