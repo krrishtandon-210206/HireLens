@@ -1,5 +1,5 @@
 // Point this at your running backend (see backend/main.py).
-const API_URL = "https://hirelens-fqtw.onrender.com/";
+const API_URL = "https://hirelens-fqtw.onrender.com/analyze";
 
 const form = document.getElementById("analyze-form");
 const submitBtn = document.getElementById("submit-btn");
